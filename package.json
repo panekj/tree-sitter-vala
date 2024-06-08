@@ -3,8 +3,11 @@
   "version": "0.53.1",
   "description": "Vala grammar for tree-sitter",
   "main": "bindings/node",
+  "types": "bindings/node",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
   },
   "repository": {
     "type": "git",
@@ -13,6 +16,14 @@
   "keywords": [
     "tree-sitter",
     "vala"
+  ],
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
   ],
   "author": "Princeton Ferro",
   "license": "LGPL-2.1-only",
@@ -27,10 +38,28 @@
         "vala",
         "vapi"
       ],
-      "highlights": ["queries/highlights.scm"],
-      "locals": ["queries/locals.scm"],
+      "highlights": [
+        "queries/highlights.scm"
+      ],
+      "locals": [
+        "queries/locals.scm"
+      ],
       "first-line-regex": "#!.*\\bvala$",
       "injection-regex": "^vala$"
     }
-  ]
+  ],
+  "dependencies": {
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "prebuildify": "^6.0.0"
+  }
 }
